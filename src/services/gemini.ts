@@ -42,19 +42,8 @@ export async function generateWebsite(prompt: string) {
       6. src/styles/
          - globals.css (global styles)
       
-      required backend files:
-      1. src/server/
-          - server.py (Flask or FastAPI server)
-          - routes.py (API routes)
-          - models.py (database models)
-          - database.py (database connection)
-          - requirements.txt (Python dependencies)
-      7. src/tests/
-          - test_server.py (unit tests for server)
-      8. src/assets/
-          - images/ (directory for images)
-          - styles/ (directory for styles)
-      9. src/config/
+      
+      7. src/config/
           - config.ts (configuration file)
 
       Each file MUST include:

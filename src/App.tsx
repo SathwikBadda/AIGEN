@@ -7,6 +7,8 @@ import { CodeViewer } from './components/CodeViewer';
 import { Bot, Send } from 'lucide-react';
 import { generateWebsite } from './services/gemini';
 import { FileStructure } from './types';
+import { AIAssistant } from './components/AIAssistant';
+import { Preview } from './components/Preview';
 
 function App() {
   const [prompt, setPrompt] = useState('');
@@ -15,6 +17,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [view, setView] = useState<'editor' | 'preview'>('editor'); // Default to "editor" view
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,7 +130,7 @@ function App() {
           <div className="flex-1 min-h-0 mb-6 ">
             {/* File Explorer and Code Viewer */}
             {view === 'editor' && files.length > 0 && (
-              <div className="flex w-[80vw] h-[100vh] p-4 bg-gray-800/80 backdrop-blur rounded-lg shadow-lg border border-gray-700 overflow-hidden h-[calc(100vh-320px)]">
+              <div className="flex w-[80vw] h-[100vh] p-4 bg-gray-800/80 backdrop-blur rounded-lg shadow-lg border border-gray-700 overflow-hidden ">
                 <div className="w-64 border-r border-gray-700">
                   <FileExplorer files={files} onFileSelect={setSelectedFile} />
                 </div>
@@ -145,10 +148,16 @@ function App() {
             {/* Preview Section */}
             {view === 'preview' && (
               <div className="h-[calc(100vh-320px)] bg-gray-800/80 backdrop-blur rounded-lg shadow-lg border border-gray-700 overflow-hidden w-[80vw]">
-                <p className="text-gray-400 text-center mt-8">Preview of the generated website will be displayed here.</p>
+                <Preview files={files} />
               </div>
             )}
           </div>
+
+          {/* AI Assistant */}
+          <AIAssistant 
+            code={selectedFile?.content || ''} 
+            fileName={selectedFile?.name}
+          />
 
           {/* Fixed Input Form */}
           <div className="sticky bottom-4 bg-gray-800/95 backdrop-blur border border-gray-700 rounded-lg p-4 shadow-lg">
