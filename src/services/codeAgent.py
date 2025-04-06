@@ -274,7 +274,13 @@ class CodeAssistant:
             )
             
             # Get base analysis
-            base_result = super().analyze_code(code, query)
+            base_result = {
+                "metrics": self._analyze_code_metrics(code),
+                "security": self._analyze_security(code),
+                "performance": self._analyze_performance(code),
+                "patterns": self._detect_design_patterns(code),
+                "timestamp": datetime.now()
+            }
             
             # Add real-time data if relevant
             if should_gather_data:
