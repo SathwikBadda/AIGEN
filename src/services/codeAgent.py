@@ -91,7 +91,7 @@ class CodeAnalysis(BaseModel):
 
 class CodeAssistant:
     def __init__(self):
-        api_key = "AIzaSyB6hZddLirVDuKKZ2Z3ExMtS1XxYiQPQb8"
+        api_key = ""
         genai.configure(api_key=api_key)
         self.model = genai.GenerativeModel("gemini-2.0-flash")
 
